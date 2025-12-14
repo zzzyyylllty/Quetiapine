@@ -1,0 +1,32 @@
+activity: # do not use underline in registry name, this may have issues when using placeholders.
+  levels:
+    0:
+      display:
+        # use %quetiapine_activity_display%(no parse) or %quetiapine_activity_display:section%/%quetiapine_activity_display:ampersand% (legacy color codes)
+        default: "<white>Level <yellow>%level%"
+
+        # use %quetiapine_activity_display_complex%(no parse) or %quetiapine_activity_display:section_complex%/%quetiapine_activity_display:ampersand_complex% (legacy color codes)
+        # %quetiapine_activity_display_complex% in Level 62 -> <gold>🌞🌞🌞<aqua>🌙🌙🌙<green>⭐⭐
+        complex:
+          type: symbol
+          sort: greater # smaller: <green>⭐⭐<aqua>🌙🌙🌙<gold>🌞🌞🌞
+          symbols:
+            # you may also use:
+            # 0:
+            #   part: "<gray>⭐"
+            0: "<gray>⭐"
+            1:
+              start: "<green>⭐"
+              part: "⭐"
+            4:
+              start: "<aqua>🌙"
+              part: "🌙"
+            16:
+              start: "<gold>🌞"
+              part: "🌞"
+            64:
+              start: "<yellow>👑"
+              part: "👑"
+            256:
+              start: "<red>🌈"
+              part: "🌈"

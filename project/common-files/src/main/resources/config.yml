@@ -1,0 +1,151 @@
+# quetiapine Configuration
+# 大部分设置需要重启以应用更改
+# MOST SETTINGS REQUIRED RESTART TO APPLY CHANGES
+# 大部分设置需要重启以应用更改
+# MOST SETTINGS REQUIRED RESTART TO APPLY CHANGES
+# 大部分设置需要重启以应用更改
+# MOST SETTINGS REQUIRED RESTART TO APPLY CHANGES
+# 大部分设置需要重启以应用更改
+# MOST SETTINGS REQUIRED RESTART TO APPLY CHANGES
+
+# 调试模式 debug
+# Debug mode
+debug: false
+
+# 语言 language
+lang: en_US
+
+# 物品修订器 用于实现物品更新 尚未实现
+# Item Revision for Item updating
+item-revision: {}
+
+file-load:
+
+  # If you want to use \ like \. , You must use \\. instead.
+  item: "^(?![#!]).*\\.(?i)(yaml|yml|toml|tml|json|conf)$"
+  lore-format: "^(?![#!]).*\\.(?i)(yaml|yml|toml|tml|json|conf)$"
+  mapping: "^(?![#!]).*\\.(?i)(yaml|yml|toml|tml|json|conf)$"
+
+
+
+preload:
+
+  # 预编译脚本
+  # Pre-compile scripts
+  script:
+    graaljs: true
+    javascript: true
+    jexl: true
+
+# 模块
+# Modules
+modules:
+  quetiapine:
+    feature: true
+    editor: true
+  xbuilder:
+    feature: true
+    editor: true
+  minecraft:
+    feature: true
+    editor: false
+  visual:
+    feature: true
+    editor: false
+  mmo:
+    feature: true
+    editor: true
+  eco:
+    feature: true
+    editor: true
+
+placeholders:
+  plus: "+"
+  minus: "-"
+
+rebuild:
+  keep-data:
+    - quetiapine_data
+    - quetiapine_revision
+  keep-component:
+#    - minecraft:custom_name
+    - minecraft:damage
+    - minecraft:max_damage
+    - minecraft:repair_cost
+
+# 发包相关功能
+# Packet related features
+packet:
+  # 是否注册包处理器
+  # 不启用或不安装packetevents 2.10+ 所有发包功能均不会生效
+  # Whether to register the packet handler
+  # If not enabled or packetevents 2.10+ is not installed, all packet sending functions will not take effect
+  register: true
+
+  # 是否启用发包Lore
+  # Whether to enable packet Lore
+  packet-lore: true
+
+  # 是否启用发包组件
+  # Whether to enable packet component
+  packet-component: true
+
+# 标签解析
+# Tag parsing
+tags:
+  quetiapine: true
+  papi: true
+  val: true
+  var: true
+  dynamic: true
+  kether: true
+
+attribute:
+
+  # 默认防抖时间
+  # Default debounce time
+  # Example: debounce-time: 250
+  # updateAttribute() // Start timer
+  # updateAttribute() // Reset timer
+  # updateAttribute() // Reset timer from 0ms
+  #
+  # // after 250 ms
+  # // updateAttribute execute.
+  debounce-time: 0
+action:
+
+  # 默认节流时间
+  # Default throttle time
+  # Example: throttle-time: 500
+  # runAction() // Execute ✅
+  # runAction() // Ignore ❌
+  # runAction() // Ignore ❌
+  #
+  # // after 500 ms
+  # runAction() // Execute ✅
+  throttle-time: 500
+
+  # 为每个动作设置不同的节流时间
+  # 0 = 禁用节流
+  # Set different throttling times for each action
+  # 0 to disable
+  throttle:
+    onConsume: 0
+
+database:
+  enable: false  # true: MySQL; false: SQLite
+  filename: data # data.db for SQLite Database File.
+  host: localhost
+  port: 3306
+  user: x_angelkawaii_x
+  password: angelkawaii2
+  database: quetiapine
+  table: quetiapine_data
+
+performance:
+  adventure:
+    # 使用将列表替换为带分割符号的单行文本以节省性能开销
+    # 这可能带来兼容性问题，谨慎使用
+    # Replace the list with a single-line text containing delimiters to reduce performance overhead
+    # This may cause compatibility issues, so use it with caution
+    use-split-replace-list-serialize: false
