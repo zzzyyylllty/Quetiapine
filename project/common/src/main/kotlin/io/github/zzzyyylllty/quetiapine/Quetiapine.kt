@@ -1,5 +1,6 @@
 package io.github.zzzyyylllty.quetiapine
 
+import io.github.zzzyyylllty.quetiapine.data.Level
 import io.github.zzzyyylllty.quetiapine.data.Regen
 import io.github.zzzyyylllty.quetiapine.data.RegenBlock
 import io.github.zzzyyylllty.quetiapine.data.RegenTemplate
@@ -11,7 +12,6 @@ import io.github.zzzyyylllty.quetiapine.util.dependencies
 import io.github.zzzyyylllty.quetiapine.util.devLog
 import org.bukkit.Location
 import org.bukkit.command.CommandSender
-import org.graalvm.polyglot.Source
 import org.tabooproject.fluxon.runtime.FluxonRuntime
 import taboolib.common.LifeCycle
 import taboolib.common.env.RuntimeEnv
@@ -51,6 +51,7 @@ object Quetiapine : Plugin() {
     val blockRegenMap = ConcurrentHashMap<Location, Regen>()
     val regenTemplatesByBlock = ConcurrentHashMap<RegenBlock, MutableList<String>>()
     val regenTemplates = ConcurrentHashMap<String, RegenTemplate>()
+    val levels = ConcurrentHashMap<String, Level>()
 
     val dateTimeFormatter: DateTimeFormatter by lazy { DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss") }
     var devMode = true
@@ -104,19 +105,36 @@ object Quetiapine : Plugin() {
             loadRegenFiles()
         }
     }
-//
-//
-//    fun createCustomConfig() {
-//        infoL("INTERNAL_INFO_CREATING_CONFIG")
-//        try {
-//            Configuration.loadFromFile(newFile(getDataFolder(), "placeholders.yml", create = true), Type.YAML)
-//            Configuration.loadFromFile(newFile(getDataFolder(), "config.yml", create = true), Type.YAML)
-//            infoL("INTERNAL_INFO_CREATED_CONFIG")
-//        } catch (e: Exception) {
-//            severeL("INTERNAL_SEVERE_CREATE_CONFIG_ERROR")
-//            e.printStackTrace()
-//        }
-//    }
+
+    @Awake(LifeCycle.INIT)
+    fun initDependenciesInit() {
+        solveDependencies(dependencies)
+    }
+
+
+    fun solveDependencies(dependencies: List<String>, useTaboo: Boolean = false) {
+        infoS("Starting loading dependencies...")
+        for (name in dependencies) {
+            try {
+                infoS("Trying to load dependencies from file $name")
+                val resource = Quetiapine::class.java.classLoader.getResource("META-INF/dependencies/$name.json")
+                if (resource == null) {
+                    severeS("Resource META-INF/dependencies/$name.json not found!")
+                    continue // 跳过这个依赖文件
+                }
+
+                if (useTaboo) RuntimeEnv.ENV_DEPENDENCY.loadFromLocalFile(resource) else QuetiapineLocalDependencyHelper().loadFromLocalFile(resource)
+
+                infoS("Trying to load dependencies from file $name ... DONE.")
+            } catch (e: Exception) {
+                severeS("Trying to load dependencies from file $name FAILED.")
+                severeS("Exception: $e")
+                e.printStackTrace()
+            }
+        }
+    }
+
+
 
 
     @SubscribeEvent

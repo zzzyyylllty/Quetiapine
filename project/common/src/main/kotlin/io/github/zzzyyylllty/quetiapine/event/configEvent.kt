@@ -2,7 +2,7 @@ package io.github.zzzyyylllty.quetiapine.event
 
 import taboolib.platform.type.BukkitProxyEvent
 
-class SertralineReloadEvent() : BukkitProxyEvent()
+class quetiapineReloadEvent() : BukkitProxyEvent()
 
 /**
  * Modify [defaultData] you can register

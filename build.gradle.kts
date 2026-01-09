@@ -140,7 +140,7 @@ allprojects {
         // Minecraft 相关库 (仅编译时需要)
         compileOnly(rootProject.libs.mythiclibdist)
         compileOnly(rootProject.libs.placeholderapi)
-        taboo(rootProject.libs.fluxoncore)
+        compileOnly(rootProject.libs.fluxoncore)
 
         compileOnly(files(rootProject.file("libs/AttributePlus-3.3.2.0.jar")))
 
@@ -149,9 +149,6 @@ allprojects {
         compileOnly(rootProject.libs.caffeine)
         compileOnly(rootProject.libs.gson)
 
-        // 脚本引擎 (GraalVM)
-        compileOnly(rootProject.libs.bundles.graalvm)
-
         compileOnly("net.momirealms:craft-engine-core:0.0.66")
         compileOnly("net.momirealms:craft-engine-bukkit:0.0.66")
         // 核心功能库 (运行时需要)
@@ -159,12 +156,9 @@ allprojects {
         implementation(rootProject.libs.bundles.asm)
         implementation(rootProject.libs.bundles.adventure)
         taboo(rootProject.libs.arim)
-        taboo(platform(rootProject.libs.kotlincrypto.bom))
-        taboo(rootProject.libs.kotlincrypto.sha2)
         taboo("cn.gtemc:itembridge:1.0.18")
-        taboo(rootProject.libs.bundles.jackson)
-        taboo(rootProject.libs.bundles.uniitem)
-        taboo(rootProject.libs.kotlin.stdlib) // 将 kotlin("stdlib") 替换为此格式
+        compileOnly(rootProject.libs.bundles.jackson)
+        taboo(rootProject.libs.kotlin.stdlib)
     }
 
 

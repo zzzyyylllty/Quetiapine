@@ -1,0 +1,15 @@
+WARRIOR:
+  display:
+    # %quetiapine_class_name%                    - warrior
+    # %quetiapine_class_registryname%            - WARRIOR
+    name: "Warrior"
+
+    # %quetiapine_class_displayname%             - <yellow>Warrior
+    # %quetiapine_class_displayname_asAmpersand% - &eWarrior
+    # %quetiapine_class_displayname_asSection%   - §eWarrior
+    displayname: "<yellow>Warrior"
+
+    custom:
+      # %quetiapine_class_display_short% - WAR
+      short: "WAR"
+  options:

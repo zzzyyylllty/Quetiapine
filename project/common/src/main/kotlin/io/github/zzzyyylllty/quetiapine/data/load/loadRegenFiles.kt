@@ -54,14 +54,14 @@ fun loadRegenFile(file: File) {
         if (map != null) for (it in map.entries) {
             val key = it.key
             val value = map[key] ?: continue
-            (value as Map<String, Any?>?)?.let { arg -> loadLoot(key, arg) }
+            (value as Map<String, Any?>?)?.let { arg -> loadRegen(key, arg) }
         } else {
             devLog("Map is null, skipping.")
         }
     }
 }
 
-fun loadLoot(key: String, arg: Map<String, Any?>) {
+fun loadRegen(key: String, arg: Map<String, Any?>) {
     val c = ConfigUtil
 
     val block = c.getBlock(arg["block"])

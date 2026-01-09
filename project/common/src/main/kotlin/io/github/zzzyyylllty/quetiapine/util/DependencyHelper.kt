@@ -7,13 +7,11 @@ val dependencies = listOf(
     "adventure",
     // "arim",
     "caffeine",
-    "datafixerupper",
     "fluxon",
     // "graaljs",
     "gson",
     "jackson",
     // "kotlincrypto",
-    "uniitem"
 )
 
 object DependencyHelper {

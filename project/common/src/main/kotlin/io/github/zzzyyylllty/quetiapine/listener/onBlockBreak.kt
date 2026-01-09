@@ -10,6 +10,7 @@ import io.github.zzzyyylllty.quetiapine.data.RegenTemplate
 import io.github.zzzyyylllty.quetiapine.util.DependencyHelper
 import io.github.zzzyyylllty.quetiapine.util.devLog
 import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks
+import net.momirealms.craftengine.core.util.Key
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Location
@@ -69,12 +70,14 @@ fun onRegenBlockBreak(e: BlockBreakEvent) {
 
     if (!(template.breakCondition?.validate(mapOf("event" to e, "block" to e.block), player) ?: true)) {
         template.agents?.runAgent("onMineDeny", mapOf("event" to e, "block" to e.block), player)
-        devLog("Condition not met, return")
+        devLog("Condition not met, cancel event.")
+        e.isCancelled = true
         return
     }
 
     if (!template.vanilla) {
         e.isDropItems = false
+        e.expToDrop = 0
     }
 
     template.items.forEach {
@@ -83,10 +86,13 @@ fun onRegenBlockBreak(e: BlockBreakEvent) {
     }
 
     val data = e.block.blockData.clone()
+    val block = e.block
+
+    template.tempBlock?.let { blockAdapters[it.adapter]?.placeByID(e.block.location, it.block) }
 
     submitAsync {
         val time = System.currentTimeMillis() + ((template.period ?: 10.0) * 1000.0).roundToLong()
-        blockRegenMap[e.block.location] = Regen(template.id, time, e.block.location, template.block, data)
+        blockRegenMap[e.block.location] = Regen(template.id, time, e.block.location, template.block, block, data)
     }
 
 }
@@ -102,15 +108,19 @@ fun getBlockID(block: Block): RegenBlock {
 
 public interface BlockAdapter {
     fun getID(block: Block): RegenBlock?
-    fun place(block: BlockData, location: Location, id: String)
+    fun place(block: Block, blockData: BlockData, location: Location, id: String)
+    fun placeByID(location: Location, id: String)
 }
 
 object CEAdapter : BlockAdapter {
     override fun getID(block: Block): RegenBlock? {
         return CraftEngineBlocks.getCustomBlockState(block)?.customBlockState()?.ownerId()?.asString()?.let { RegenBlock("craftengine", it) }
     }
-    override fun place(block: BlockData, location: Location, id: String) {
+    override fun place(block: Block, blockData: BlockData, location: Location, id: String) {
         CraftEngineBlocks.getCustomBlockState(block)?.let { CraftEngineBlocks.place(location, it, false) }
+    }
+    override fun placeByID(location: Location, id: String) {
+        CraftEngineBlocks.place(location, Key.of(id), false)
     }
 
 }
@@ -118,15 +128,18 @@ object MCAdapter : BlockAdapter {
     override fun getID(block: Block): RegenBlock {
         return RegenBlock("minecraft", block.type.name)
     }
-
-    override fun place(block: BlockData, location: Location, id: String) {
-        location.world.setBlockData(location, block)
+    override fun place(block: Block, blockData: BlockData, location: Location, id: String) {
+        location.world.getBlockAt(location).type = Material.valueOf(id)
+    }
+    override fun placeByID(location: Location, id: String) {
+        location.world.getBlockAt(location).type = Material.valueOf(id)
     }
 }
 
 @Awake(LifeCycle.ENABLE)
 fun registerNativeBlockAdapters() {
     if (DependencyHelper.ce) blockAdapters["craftengine"] = CEAdapter
+    blockAdapters["minecraft"] = MCAdapter
 }
 
 

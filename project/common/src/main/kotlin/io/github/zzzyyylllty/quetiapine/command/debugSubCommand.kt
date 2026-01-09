@@ -3,6 +3,7 @@ package io.github.zzzyyylllty.quetiapine.command
 import io.github.zzzyyylllty.embiancomponent.EmbianComponent.SafetyComponentSetter
 import io.github.zzzyyylllty.embiancomponent.tools.getComponentsNMSFiltered
 import io.github.zzzyyylllty.quetiapine.Quetiapine.blockRegenMap
+import io.github.zzzyyylllty.quetiapine.Quetiapine.levels
 import io.github.zzzyyylllty.quetiapine.Quetiapine.regenTemplates
 import io.github.zzzyyylllty.quetiapine.Quetiapine.regenTemplatesByBlock
 import io.github.zzzyyylllty.quetiapine.logger.infoS
@@ -66,6 +67,14 @@ object DebugCommand {
     val getRegenTemplates = subCommand {
         execute<CommandSender> { sender, context, argument ->
             var message = regenTemplates.toString()
+            sender.infoS(message, false)
+        }
+    }
+
+    @CommandBody
+    val getLevels = subCommand {
+        execute<CommandSender> { sender, context, argument ->
+            var message = levels.toString()
             sender.infoS(message, false)
         }
     }

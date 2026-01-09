@@ -7,22 +7,25 @@ import io.github.zzzyyylllty.quetiapine.util.loc
 import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks
 import org.bukkit.Bukkit
 import org.bukkit.Location
+import org.bukkit.block.Block
 import org.bukkit.block.data.BlockData
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import taboolib.common.platform.function.submit
 
 data class Regen(
     val templateID: String,
     val end: Long,
     val location: Location,
     val block: RegenBlock,
+    val bBlock: Block,
     val blockData: BlockData,
 ) {
     val template
     get() = regenTemplates[templateID]
 
     fun update() {
-        blockAdapters[block.adapter]?.place(blockData, location, block.block)
+        submit { blockAdapters[block.adapter]?.place(bBlock, blockData, location, block.block) }
     }
 }
 
