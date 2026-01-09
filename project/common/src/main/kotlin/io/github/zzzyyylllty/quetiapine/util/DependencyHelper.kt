@@ -30,6 +30,22 @@ object DependencyHelper {
         isPluginInstalled("packetevents")
     }
 
+    val ce by lazy {
+        isPluginInstalled("CraftEngine")
+    }
+
+    val ia by lazy {
+        isPluginInstalled("ItemsAdder")
+    }
+
+    val ox by lazy {
+        isPluginInstalled("Oxaren")
+    }
+
+    val ne by lazy {
+        isPluginInstalled("Nexo")
+    }
+
 
 
 

@@ -12,7 +12,7 @@ class VersionHelper {
     }
     val isQuetiapinePremium by lazy {
         try {
-            val classInstance = Class.forName("io.github.zzzyyylllty.sertraline.premium.PremiumHelper")
+            val classInstance = Class.forName("io.github.zzzyyylllty.quetiapine.premium.PremiumHelper")
             return@lazy (classInstance != null)
         } catch (e: ClassNotFoundException) {
             return@lazy false

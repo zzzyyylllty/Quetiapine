@@ -57,6 +57,7 @@ allprojects {
 
     repositories {
         mavenLocal()
+        maven("https://repo.gtemc.net/releases/")
         maven("https://repo.auxilor.io/repository/maven-public/")
         maven("https://nexus.phoenixdevt.fr/repository/maven-public/")
         maven("https://repo.aeoliancloud.com/release")
@@ -74,6 +75,7 @@ allprojects {
             url = uri("https://nexus.maplex.top/repository/maven-public/")
             isAllowInsecureProtocol = true
         }
+        maven("https://maven.enginehub.org/repo")
         maven("https://maven.aliyun.com/repository/google")
         maven("https://maven.aliyun.com/repository/public")
         maven("https://maven.aliyun.com/repository/jcenter")
@@ -114,7 +116,6 @@ allprojects {
         }
 
         maven("https://repo.momirealms.net/releases/")
-        maven("https://repo.momirealms.net/releases/")
         maven { url = uri("https://repo.codemc.io/repository/maven-releases/") }
 
         maven { url = uri("https://repo.codemc.io/repository/maven-snapshots/") }
@@ -129,18 +130,19 @@ allprojects {
 //        taboo("io.github.zzzyyylllty:EmbianComponent:1.0.2")
 //        compileOnly("com.willfp:eco:6.77.2")
 
+        taboo("io.github.zzzyyylllty:EmbianComponent:1.0.2")
+        implementation("com.sk89q.worldguard:worldguard-bukkit:7.0.10-SNAPSHOT")
+        implementation("com.sk89q.worldguard:worldguard-core:7.0.10-SNAPSHOT")
+
         // 服务器 API
         implementation(rootProject.libs.paperapi)
 
         // Minecraft 相关库 (仅编译时需要)
         compileOnly(rootProject.libs.mythiclibdist)
         compileOnly(rootProject.libs.placeholderapi)
-        compileOnly(rootProject.libs.packeteventsspigot)
-        compileOnly(rootProject.libs.datafixerupper)
         compileOnly(rootProject.libs.fluxoncore)
 
-        // 本地依赖 (这行需要保留)
-        compileOnly(fileTree("rootProject.libs"))
+        compileOnly(files(rootProject.file("libs/AttributePlus-3.3.2.0.jar")))
 
         // 工具库
         compileOnly(rootProject.libs.netty.all)
@@ -150,6 +152,8 @@ allprojects {
         // 脚本引擎 (GraalVM)
         compileOnly(rootProject.libs.bundles.graalvm)
 
+        compileOnly("net.momirealms:craft-engine-core:0.0.66")
+        compileOnly("net.momirealms:craft-engine-bukkit:0.0.66")
         // 核心功能库 (运行时需要)
         implementation(rootProject.libs.bundles.reflex)
         implementation(rootProject.libs.bundles.asm)
@@ -157,7 +161,8 @@ allprojects {
         taboo(rootProject.libs.arim)
         taboo(platform(rootProject.libs.kotlincrypto.bom))
         taboo(rootProject.libs.kotlincrypto.sha2)
-        compileOnly(rootProject.libs.bundles.jackson)
+        taboo("cn.gtemc:itembridge:1.0.18")
+        taboo(rootProject.libs.bundles.jackson)
         taboo(rootProject.libs.bundles.uniitem)
         taboo(rootProject.libs.kotlin.stdlib) // 将 kotlin("stdlib") 替换为此格式
     }

@@ -10,6 +10,11 @@ taboolib {
         dependencies {
             name("MythicMobs").optional(true)
             name("Chemdah").optional(true)
+            name("ItemsAdder").optional(true)
+            name("Oxaren").optional(true)
+            name("Nexo").optional(true)
+            name("CraftEngine").optional(true)
+            name("PlaceholderAPI").optional(true)
             // name("ProtocolLib").optional(true)
             // 可选依赖.
             // name("XXX").optional(true)

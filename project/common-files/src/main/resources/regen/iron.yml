@@ -1,0 +1,36 @@
+iron:
+  block:
+    adapter: minecraft
+    block: iron_ore
+  period: 30
+  temp-block:
+    adapter: minecraft
+    block: bedrock
+
+  # Post condition will not trigger onMineDeny
+  post-condition:
+    ke: |-
+      check papi %player_world% == "world"  
+
+  # condition will trigger onMineDeny
+  condition:
+    ke: |-
+      check papi %player_level% >= 20
+  vanilla-drops: false
+  items:
+    - item: diamond # craftengine:default:topaz
+    - condition:
+        ke: |-
+          check papi %player_level% >= 20
+      item: emerald
+  agent:
+    onMineDeny:
+      ke: |-
+        minitell "You must reach level 5 to mine"
+    onMined:
+      ke: |-
+        minitell inline "Hello, {{ sender }}!"
+    # onRegenerate: |-
+    #   check 1 == 1
+    # onRegenerated: |-
+    #   broadcast "Hello, world"

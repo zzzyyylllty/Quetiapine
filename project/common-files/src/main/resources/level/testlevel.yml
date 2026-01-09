@@ -1,12 +1,24 @@
-activity: # do not use underline in registry name, this may have issues when using placeholders.
-  levels:
-    0:
-      display:
-        # use %quetiapine_activity_display%(no parse) or %quetiapine_activity_display:section%/%quetiapine_activity_display:ampersand% (legacy color codes)
+# do not use underline in registry name, this may have issues when using placeholders.
+activity:
+  display:
+    default: "<yellow>Activity</yellow>" # %quetiapine_levelname%
+    legacy: "&6Activity" # %quetiapine_levelname_legacy%
+  level:
+    # min level
+    min: 0
+    # start level
+    start: 0
+    # null for unlimited
+    max: 1000
+    # Dynamic max level
+    # max: '{{ if perm "group.svip" then 1000 else if perm "group.vip" then 500 else 100 }}'
+    display:
+      0:
+        # use %quetiapine_level_activity_display%(no parse) or %quetiapine_level_activity_display:section%/%quetiapine_level_activity_display:ampersand% (legacy color codes)
         default: "<white>Level <yellow>%level%"
 
-        # use %quetiapine_activity_display_complex%(no parse) or %quetiapine_activity_display:section_complex%/%quetiapine_activity_display:ampersand_complex% (legacy color codes)
-        # %quetiapine_activity_display_complex% in Level 62 -> <gold>🌞🌞🌞<aqua>🌙🌙🌙<green>⭐⭐
+          # use %quetiapine_level_activity_display_complex%(no parse) or %quetiapine_level_activity_display:section_complex%/%quetiapine_level_activity_display:ampersand_complex% (legacy color codes)
+          # %quetiapine_level_activity_display_complex% in Level 62 -> <gold>🌞🌞🌞<aqua>🌙🌙🌙<green>⭐⭐
         complex:
           type: symbol
           sort: greater # smaller: <green>⭐⭐<aqua>🌙🌙🌙<gold>🌞🌞🌞
@@ -30,3 +42,13 @@ activity: # do not use underline in registry name, this may have issues when usi
             256:
               start: "<red>🌈"
               part: "🌈"
+      20: # >= 20
+        default: "<yellow>Level <yellow>%level%"
+      50: # >= 50
+        default: "<red>Level <yellow>%level%"
+  exp:
+    # https://taboolib.maplex.top/docs/expanding-technology/arim/fixed-calculator/
+    # String for calculator (fixed calculator)
+    0: %level% * 5 + 100"
+    20: 300 # 20..49
+    50: 500 # >=50
