@@ -6,14 +6,13 @@ import io.github.zzzyyylllty.quetiapine.logger.warningL
 import io.github.zzzyyylllty.quetiapine.util.ExternalItemHelper
 import io.github.zzzyyylllty.quetiapine.util.VersionHelper
 import io.github.zzzyyylllty.quetiapine.util.asListEnhanced
-import io.github.zzzyyylllty.quetiapine.util.minimessage.toComponent
+import io.github.zzzyyylllty.quetiapine.util.toComponent
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import taboolib.library.xseries.XItemStack
 import taboolib.module.nms.NMSItemTag.Companion.asNMSCopy
-import kotlin.math.roundToInt
 
 private val specialItemNamespace = listOf("minecraft", "mc", "vanilla")
 val componentHelper by lazy { if (VersionHelper().isOrAbove12005()) EmbianComponent.SafetyComponentSetter else null }

@@ -1,9 +1,5 @@
 package io.github.zzzyyylllty.quetiapine.function.javascript
 
-import com.github.retrooper.packetevents.protocol.dialog.input.Input
-import io.github.zzzyyylllty.quetiapine.item.adapter.transferBooleanToByte
-import io.github.zzzyyylllty.quetiapine.item.rebuildLore
-import io.github.zzzyyylllty.quetiapine.logger.severeS
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.title.Title
 import net.kyori.adventure.title.Title.Times.times

@@ -80,6 +80,7 @@ fun loadLoot(key: String, arg: Map<String, Any?>) {
         }
     }
 
+    val breakCondition = c.getConditions(arg["break-conditions"] ?: arg["break-condition"])
 
     if (block == null) severeS("Target Regen Block cannot be null!")
     block?.let {
@@ -88,6 +89,7 @@ fun loadLoot(key: String, arg: Map<String, Any?>) {
             it,
             post,
             condition,
+            breakCondition,
             period,
             tempBlock,
             vanilla,

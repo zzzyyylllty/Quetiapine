@@ -1,6 +1,6 @@
 package io.github.zzzyyylllty.quetiapine.function.fluxon.script
 
-import io.github.zzzyyylllty.quetiapine.quetiapine.fluxonInst
+import io.github.zzzyyylllty.quetiapine.Quetiapine.fluxonInst
 import io.github.zzzyyylllty.quetiapine.function.fluxon.script.FunctionBukkit.FluxonBukkitObject
 import io.github.zzzyyylllty.quetiapine.util.minimessage.mmJsonUtil
 import io.github.zzzyyylllty.quetiapine.util.minimessage.mmLegacyAmpersandUtil

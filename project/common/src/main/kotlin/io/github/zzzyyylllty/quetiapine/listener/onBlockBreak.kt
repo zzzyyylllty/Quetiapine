@@ -55,17 +55,21 @@ fun onRegenBlockBreak(e: BlockBreakEvent) {
             continue
         }
         // 条件
-        if (cTemplate.postCondition?.validate(mapOf("event" to e, "block" to e.block), player) ?: true) {
+        if (cTemplate.condition?.validate(mapOf("event" to e, "block" to e.block), player) ?: true) {
             devLog("Condition met,break")
             template = cTemplate
             break
         }
-        cTemplate.agents.runAgent("onMineDeny", mapOf("event" to e, "block" to e.block), player)
-        devLog("Condition not met, continue")
     }
 
     if (template == null) {
         devLog("template not found")
+        return
+    }
+
+    if (!(template.breakCondition?.validate(mapOf("event" to e, "block" to e.block), player) ?: true)) {
+        template.agents?.runAgent("onMineDeny", mapOf("event" to e, "block" to e.block), player)
+        devLog("Condition not met, return")
         return
     }
 
@@ -78,9 +82,11 @@ fun onRegenBlockBreak(e: BlockBreakEvent) {
         item?.let { e.block.world.dropItemNaturally(e.block.location, it) }
     }
 
+    val data = e.block.blockData.clone()
+
     submitAsync {
         val time = System.currentTimeMillis() + ((template.period ?: 10.0) * 1000.0).roundToLong()
-        blockRegenMap[e.block.location] = Regen(template.id, time, e.block.location, template.block, e.block.blockData)
+        blockRegenMap[e.block.location] = Regen(template.id, time, e.block.location, template.block, data)
     }
 
 }
@@ -130,9 +136,23 @@ fun refreshRegenBlocks() {
         for (entry in blockRegenMap) {
             // 如果已经结束
             if (entry.value.end <= System.currentTimeMillis()) {
+                devLog("Updating $entry")
                 entry.value.update()
+                blockRegenMap.remove(entry.key)
             }
         }
+    }
+}
+
+
+
+@Awake(LifeCycle.DISABLE)
+fun releaseRegenBlocks() {
+    for (entry in blockRegenMap) {
+        // 如果已经结束
+        devLog("Releasing $entry")
+        entry.value.update()
+        blockRegenMap.remove(entry.key)
     }
 }
 

@@ -1,22 +1,22 @@
 package io.github.zzzyyylllty.quetiapine.function.fluxon
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import io.github.zzzyyylllty.quetiapine.logger.severeS
 import org.tabooproject.fluxon.Fluxon
 import org.tabooproject.fluxon.interpreter.Interpreter
 import org.tabooproject.fluxon.interpreter.ReturnValue
-import org.tabooproject.fluxon.parser.ParseException
 import org.tabooproject.fluxon.parser.ParseResult
+import org.tabooproject.fluxon.parser.ParsedScript
 import org.tabooproject.fluxon.runtime.Environment
 import org.tabooproject.fluxon.runtime.FluxonRuntime
-import org.tabooproject.fluxon.runtime.FluxonRuntimeError
-import taboolib.common.platform.function.warning
+import org.tabooproject.fluxon.runtime.error.FluxonRuntimeError
 import java.util.concurrent.TimeUnit
 
 object FluxonShell {
 
     val scriptCache = Caffeine.newBuilder()
         .expireAfterAccess(1, TimeUnit.HOURS)
-        .build<String, List<ParseResult>>()
+        .build<String, ParsedScript>()
 
     /**
      * 解释脚本但不执行
@@ -49,7 +49,7 @@ object FluxonShell {
         } else {
             parse(script, environment)
         }
-        return invoke(parsed, environment)
+        return parsed.eval(environment)
     }
 
     /**
@@ -70,12 +70,12 @@ object FluxonShell {
         }
     }
 
-    fun parse(script: String, environment: Environment): List<ParseResult> {
+    fun parse(script: String, environment: Environment): ParsedScript {
         return try {
             Fluxon.parse(script.removePrefix(";"), environment)
-        } catch (ex: ParseException) {
-            warning("an error was happen in trying parse script: $script . error is:\n${ex.formatDiagnostic()}")
-            emptyList()
+        } catch (ex: Exception) {
+            severeS("An error was happen in trying parse FL script: $script . error is:\n${ex}")
+            throw ex
         }
     }
 }

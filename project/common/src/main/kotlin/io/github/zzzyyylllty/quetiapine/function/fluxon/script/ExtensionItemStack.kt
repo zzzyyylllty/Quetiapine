@@ -1,6 +1,5 @@
 package io.github.zzzyyylllty.quetiapine.function.fluxon.script
 
-import io.github.zzzyyylllty.quetiapine.quetiapine.fluxonInst
 import io.github.zzzyyylllty.quetiapine.function.fluxon.script.FunctionBukkit.FluxonBukkitObject
 import io.github.zzzyyylllty.quetiapine.util.minimessage.mmJsonUtil
 import io.github.zzzyyylllty.quetiapine.util.minimessage.mmLegacyAmpersandUtil
@@ -28,7 +27,8 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.meta.ItemMeta
 import taboolib.common.LifeCycle
 import taboolib.common.platform.Awake
-import com.cryptomorin.xseries.XMaterial
+import io.github.zzzyyylllty.quetiapine.Quetiapine.fluxonInst
+import taboolib.library.xseries.XMaterial
 
 
 @Awake(LifeCycle.ENABLE)

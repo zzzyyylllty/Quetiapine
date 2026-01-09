@@ -1,7 +1,8 @@
-package io.github.zzzyyylllty.quetiapine.util.minimessage
+package io.github.zzzyyylllty.quetiapine.util
 
-import io.github.zzzyyylllty.quetiapine.quetiapine.config
-import io.github.zzzyyylllty.quetiapine.item.adapter.transferBooleanToByte
+import io.github.zzzyyylllty.quetiapine.Quetiapine.config
+import io.github.zzzyyylllty.quetiapine.util.minimessage.mmJsonUtil
+import io.github.zzzyyylllty.quetiapine.util.minimessage.mmUtil
 import net.kyori.adventure.text.Component
 import kotlin.collections.component1
 import kotlin.collections.component2

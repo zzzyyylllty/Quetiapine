@@ -140,7 +140,7 @@ allprojects {
         // Minecraft 相关库 (仅编译时需要)
         compileOnly(rootProject.libs.mythiclibdist)
         compileOnly(rootProject.libs.placeholderapi)
-        compileOnly(rootProject.libs.fluxoncore)
+        taboo(rootProject.libs.fluxoncore)
 
         compileOnly(files(rootProject.file("libs/AttributePlus-3.3.2.0.jar")))
 

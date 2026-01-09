@@ -4,6 +4,7 @@ import io.github.zzzyyylllty.quetiapine.data.Regen
 import io.github.zzzyyylllty.quetiapine.data.RegenBlock
 import io.github.zzzyyylllty.quetiapine.data.RegenTemplate
 import io.github.zzzyyylllty.quetiapine.data.load.loadRegenFiles
+import io.github.zzzyyylllty.quetiapine.listener.releaseRegenBlocks
 import io.github.zzzyyylllty.quetiapine.logger.*
 import io.github.zzzyyylllty.quetiapine.util.QuetiapineLocalDependencyHelper
 import io.github.zzzyyylllty.quetiapine.util.dependencies
@@ -87,6 +88,8 @@ object Quetiapine : Plugin() {
 
     fun reloadCustomConfig(async: Boolean = true) {
         submit(async) {
+
+            releaseRegenBlocks()
 
             config.reload()
             devMode = config.getBoolean("debug",false)

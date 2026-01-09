@@ -5,7 +5,6 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
-import io.github.zzzyyylllty.quetiapine.debugMode.devLog
 import kotlin.jvm.java
 import kotlin.math.round
 

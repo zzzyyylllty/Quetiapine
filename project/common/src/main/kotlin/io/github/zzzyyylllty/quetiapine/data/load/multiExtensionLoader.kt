@@ -1,6 +1,5 @@
 package io.github.zzzyyylllty.quetiapine.data.load
 
-import io.github.zzzyyylllty.lithiumcarbon.util.parseToMap
 import io.github.zzzyyylllty.quetiapine.util.serialize.parseToMap
 import java.io.File
 import java.util.Locale

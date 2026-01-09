@@ -3,6 +3,7 @@ package io.github.zzzyyylllty.quetiapine.command
 import io.github.zzzyyylllty.quetiapine.Quetiapine.reloadCustomConfig
 import io.github.zzzyyylllty.quetiapine.logger.fineS
 import io.github.zzzyyylllty.quetiapine.logger.infoS
+import io.github.zzzyyylllty.quetiapine.logger.sendStringAsComponent
 import taboolib.common.platform.command.component.CommandComponentDynamic
 import taboolib.common.platform.command.component.CommandComponentLiteral
 import taboolib.module.lang.asLangText

@@ -31,6 +31,7 @@ data class RegenTemplate(
     val block: RegenBlock,
     val postCondition: Condition?,
     val condition: Condition?,
+    val breakCondition: Condition?,
     val period: Double?,
     val tempBlock: RegenBlock?,
     val vanilla: Boolean,

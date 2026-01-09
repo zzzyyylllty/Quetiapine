@@ -1,5 +1,7 @@
 package io.github.zzzyyylllty.quetiapine.command
 
+import io.github.zzzyyylllty.quetiapine.function.kether.runKether
+import io.github.zzzyyylllty.quetiapine.logger.infoS
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

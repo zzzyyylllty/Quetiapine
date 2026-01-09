@@ -1,12 +1,5 @@
 package io.github.zzzyyylllty.quetiapine.function.javascript
 
-import com.github.retrooper.packetevents.protocol.dialog.input.Input
-import io.github.zzzyyylllty.quetiapine.item.adapter.transferBooleanToByte
-import io.github.zzzyyylllty.quetiapine.item.rebuild
-import io.github.zzzyyylllty.quetiapine.item.rebuildBypassKeepData
-import io.github.zzzyyylllty.quetiapine.item.rebuildLore
-import io.github.zzzyyylllty.quetiapine.item.rebuildName
-import io.github.zzzyyylllty.quetiapine.item.rebuildUnsafe
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import taboolib.module.nms.ItemTag
@@ -26,30 +19,5 @@ object ItemStackUtil {
     // 该方法会改变原本物品!
     fun setItemTagDirect(itemStack: ItemStack, tag: ItemTag): ItemStack {
         return tag.saveTo(itemStack)
-    }
-
-    // tb不支持 boolean NBT，需要包裹一层这个函数
-    fun transferToByte(input: Any?): Any? {
-        return transferBooleanToByte(input)
-    }
-
-    fun rebuildLore(itemStack: ItemStack,player: Player?) {
-        itemStack.rebuildLore(player)
-    }
-
-    fun rebuildName(itemStack: ItemStack,player: Player?) {
-        itemStack.rebuildName(player)
-    }
-
-    fun rebuild(itemStack: ItemStack,player: Player?): ItemStack {
-        return itemStack.rebuild(player)
-    }
-
-    fun rebuildBypassKeepData(itemStack: ItemStack,player: Player?): ItemStack {
-        return itemStack.rebuildBypassKeepData(player)
-    }
-
-    fun rebuildUnsafe(itemStack: ItemStack,player: Player?) {
-        itemStack.rebuildUnsafe(player)
     }
 }
